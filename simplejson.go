@@ -195,7 +195,7 @@ func (j *Json) ArrayJson() ([]*Json, error) {
 
 	aa, ok = (j.data).([]interface{})
 	if !ok {
-		return nil, errors.New("type assertion to []*Json{} failed")
+		return nil, errors.New("type assertion to []interface{} failed")
 	}
 
 	for _, v := range aa {
