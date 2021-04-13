@@ -189,10 +189,19 @@ func (j *Json) Array() ([]interface{}, error) {
 
 // ArrayJson type asserts to an `ArrayJson`
 func (j *Json) ArrayJson() ([]*Json, error) {
-	if a, ok := (j.data).([]*Json); ok {
-		return a, nil
+	var aa []interface{}
+	var ok bool
+	var res []*Json
+
+	aa, ok = (j.data).([]interface{})
+	if !ok {
+		return nil, errors.New("type assertion to []*Json{} failed")
 	}
-	return nil, errors.New("type assertion to []*Json{} failed")
+
+	for _, v := range aa {
+		res = append(res, &Json{v})
+	}
+	return res, nil
 }
 
 // Bool type asserts to `bool`
